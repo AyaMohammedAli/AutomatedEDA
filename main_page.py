@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import io
 import sqlalchemy
 from sqlalchemy import create_engine
 import plotly.express as px
@@ -12,9 +13,10 @@ def load_data():
     filename = uploaded_file.name
     if filename is not None:
         if filename.endswith('.csv'):
-            data = pd.read_csv(filename)
+            bytes_data = uploaded_file.getvalue() 
+            data = pd.read_csv(io.BytesIO(bytes_data))
         elif filename.endswith('.xlsx'):
-            data = pd.read_excel(filename)
+            data = pd.read_excel(io.BytesIO(bytes_data))
 
         else:
             #db_conn = "sqlite:///data.db"
@@ -61,7 +63,7 @@ def handle_missing(df):
 data = handle_missing(data)
 
 ##################
-@st.experimental_memo  
+@st.cache_data  
 def visulizationOfNumerical(df):
     #get numerical features
     numeric_cols = [col for col in df.columns if df[col].dtype != 'O']
@@ -103,6 +105,7 @@ def visulizationOfNumerical(df):
 
    
 visulizationOfNumerical(data)
+
 @st.cache_data(experimental_allow_widgets=True)
 def visl_categorical(df):
     st.title('Visualizing categorical Data')

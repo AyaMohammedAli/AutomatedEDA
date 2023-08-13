@@ -100,9 +100,11 @@ def visulizationOfNumerical(df):
     st.plotly_chart(fig)
 
     # Violin plot
-    fig = px.violin(df, y= [4])
+    fig = px.violin(df, y= numeric_cols[4])
     st.plotly_chart(fig)
-
+    # Violin plot
+    fig = px.violin(df, y= numeric_cols[2])
+    st.plotly_chart(fig)
    
 visulizationOfNumerical(data)
 
@@ -112,6 +114,12 @@ def visl_categorical(df):
 
     categorical_cols = [col for col in df.columns if df[col].dtype == 'object']
     fig = px.pie(df, values=categorical_cols[-1], names=categorical_cols[0])
+    st.plotly_chart(fig)
+
+    fig = px.pie(df, values=categorical_cols[2], names=categorical_cols[0])
+    st.plotly_chart(fig)
+
+    fig = px.pie(df, values=categorical_cols[1], names=categorical_cols[0])
     st.plotly_chart(fig)
 
     fig3 = px.strip(df, x= categorical_cols[2], y= categorical_cols[-1])

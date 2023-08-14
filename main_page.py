@@ -113,14 +113,13 @@ def visl_categorical(df):
     st.title('Visualizing categorical Data')
 
     categorical_cols = [col for col in df.columns if df[col].dtype == 'object']
+    
     fig = px.bar(df, x = categorical_cols[-1], y =categorical_cols[0])
     st.plotly_chart(fig)
 
     fig = px.bar(df, x = categorical_cols[2], y=categorical_cols[0])
     st.plotly_chart(fig)
 
-    fig = px.pie(df, values =categorical_cols[1], names=categorical_cols[0])
-    st.plotly_chart(fig)
 
     fig3 = px.strip(df, x= categorical_cols[2], y= categorical_cols[-1])
     st.plotly_chart(fig3)

@@ -29,7 +29,7 @@ def load_data():
             data = pd.read_sql(query, engine)
         return data
 data = load_data()
-sample_frac = 0.4
+sample_frac = 0.3
 data = data.sample(frac=sample_frac) 
 
 ##################

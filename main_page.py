@@ -120,7 +120,7 @@ def visl_categorical(df):
     st.plotly_chart(fig)
 
     fig = px.bar(df, values=categorical_cols[1], names=categorical_cols[0])
-    st.fig)
+    st.plotly_chart(fig)
 
     fig3 = px.strip(df, x= categorical_cols[2], y= categorical_cols[-1])
     st.plotly_chart(fig3)

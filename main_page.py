@@ -4,6 +4,7 @@ import io
 import sqlalchemy
 from sqlalchemy import create_engine
 import plotly.express as px
+import sklearn
 from sklearn.impute import SimpleImputer 
 
 st.title('Visualizing Data :sunglasses:')

@@ -69,10 +69,10 @@ def visulizationOfNumerical(df):
     numeric_cols = [col for col in df.columns if df[col].dtype != 'O']
     st.title('Visualizing Numerical Data')
     # Scatter plot
-    fig = px.scatter(df, x=numeric_cols[2], y= numeric_cols[3])
+    fig = px.scatter(df, x=numeric_cols[0], y= numeric_cols[1])
     st.plotly_chart(fig)
 
-    fig = px.scatter(df, x=numeric_cols[0], y= numeric_cols[4])
+    fig = px.scatter(df, x=numeric_cols[0], y= numeric_cols[2])
     st.plotly_chart(fig)
 
 

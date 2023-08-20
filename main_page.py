@@ -137,14 +137,31 @@ def visl_categorical(df):
 
     categorical_cols = [col for col in df.columns if df[col].dtype == 'object']
     
-    fig = px.bar(df, x = categorical_cols[-1], y =categorical_cols[0])
-    st.plotly_chart(fig)
+    if len(categorical_cols) > 0:
 
-    fig = px.bar(df, x = categorical_cols[2], y=categorical_cols[0])
-    st.plotly_chart(fig)
+        x_col = categorical_cols[-1]
+        y_col = categorical_cols[0]
 
+        fig = px.bar(df, x=x_col, y=y_col)
+        st.plotly_chart(fig)
 
-    fig3 = px.strip(df, x= categorical_cols[2], y= categorical_cols[-1])
-    st.plotly_chart(fig3)
+        if len(categorical_cols) > 2:
+        
+            x_col = categorical_cols[2]
+            y_col = categorical_cols[0]
+
+            fig = px.bar(df, x=x_col, y=y_col)
+            st.plotly_chart(fig)
+
+        if len(categorical_cols) > 2:
+
+            x_col = categorical_cols[2] 
+            y_col = categorical_cols[-1]
+
+            fig3 = px.strip(df, x=x_col, y=y_col)
+            st.plotly_chart(fig3)
+
+    else:
+        st.write("Not enough categorical columns for plots")
 
 visl_categorical(data)

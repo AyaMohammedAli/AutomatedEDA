@@ -101,31 +101,34 @@ def visulizationOfNumerical(df):
         fig.update_xaxes(type='category')
 
         st.plotly_chart(fig)
+  
+        # Histogram
+        if len(numeric_cols) > 0:
+            x_col = numeric_cols[0]
+            y_col = numeric_cols[-1]
+        
+        fig = px.histogram(df, x=x_col)
+        st.plotly_chart(fig) 
 
+        fig = px.histogram(df, x = y_col)
+        st.plotly_chart(fig)
+
+        # Box plot
+        fig = px.box(df, y= y_col)
+        st.plotly_chart(fig)
+        # Box plot
+        fig = px.box(df, y = x_col)
+        st.plotly_chart(fig)
+
+        # Violin plot
+        fig = px.violin(df, y= numeric_cols[4])
+        st.plotly_chart(fig)
+        # Violin plot
+        fig = px.violin(df, y= numeric_cols[2])
+        st.plotly_chart(fig)
     else:
         st.write("Not enough numeric columns for bar chart")
-            
-
-   
-
-    # Histogram
-    fig = px.histogram(df, x=numeric_cols[0])
-    st.plotly_chart(fig) 
-
-    fig = px.histogram(df, x=numeric_cols[3])
-    st.plotly_chart(fig)
-
-    # Box plot
-    fig = px.box(df, y= numeric_cols[2])
-    st.plotly_chart(fig)
-
-    # Violin plot
-    fig = px.violin(df, y= numeric_cols[4])
-    st.plotly_chart(fig)
-    # Violin plot
-    fig = px.violin(df, y= numeric_cols[2])
-    st.plotly_chart(fig)
-   
+    
 visulizationOfNumerical(data)
 
 @st.cache_data(experimental_allow_widgets=True)

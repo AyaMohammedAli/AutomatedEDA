@@ -29,7 +29,7 @@ def load_data():
             data = pd.read_sql(query, engine)
         return data
 data = load_data()
-sample_frac = 0.3
+sample_frac = 0.2
 data = data.sample(frac=sample_frac) 
 
 ##################
@@ -68,25 +68,45 @@ def visulizationOfNumerical(df):
     #get numerical features
     numeric_cols = [col for col in df.columns if df[col].dtype != 'O']
     st.title('Visualizing Numerical Data')
-    # Scatter plot
-    fig = px.scatter(df, x=numeric_cols[0], y= numeric_cols[1])
-    st.plotly_chart(fig)
+    if len(numeric_cols) >= 2:
 
-    fig = px.scatter(df, x=numeric_cols[0], y= numeric_cols[2])
-    st.plotly_chart(fig)
+        # Scatter plot
+        x_col = numeric_cols[0] 
+        y_col = numeric_cols[1]
+        fig = px.scatter(df, x=x_col, y=y_col)
+        st.plotly_chart(fig)
 
+        if len(numeric_cols) >= 3:
+            x_col = numeric_cols[0]
+            y_col = numeric_cols[2]  
+            fig = px.scatter(df, x=x_col, y=y_col)
+            st.plotly_chart(fig)
 
-    fig = px.bar(df, x=numeric_cols[0], y=numeric_cols[-1])
+        else:
+            st.write("Not enough numeric columns for scatter plot")
+        
+        # Bar chart
+    if len(numeric_cols) > 0:
+        x_col = numeric_cols[0]
+        y_col = numeric_cols[-1]
+        
+        fig = px.bar(df, x=x_col, y=y_col)
 
-    fig.update_layout( 
-        title='Bar Chart',
-        xaxis_title=numeric_cols[0], 
-        yaxis_title=numeric_cols[-1]
-    )
+        fig.update_layout(
+            title='Bar Chart',
+            xaxis_title=x_col,
+            yaxis_title=y_col
+        )
 
-    fig.update_xaxes(type='category') 
+        fig.update_xaxes(type='category')
 
-    st.plotly_chart(fig)
+        st.plotly_chart(fig)
+
+    else:
+        st.write("Not enough numeric columns for bar chart")
+            
+
+   
 
     # Histogram
     fig = px.histogram(df, x=numeric_cols[0])

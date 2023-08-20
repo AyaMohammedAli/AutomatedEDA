@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 import plotly.express as px
 
 st.title('Visualizing Data :sunglasses:')
-@st.cache_data(experimental_allow_widgets=True)
+#@st.cache_data(experimental_allow_widgets=True)
 #uplode data 
 def load_data():
     uploaded_file = st.file_uploader("Choose a file")
@@ -63,7 +63,7 @@ def handle_missing(df):
 data = handle_missing(data)
 
 ##################
-@st.cache_data  
+#@st.cache_data  
 def visulizationOfNumerical(df):
     #get numerical features
     numeric_cols = [col for col in df.columns if df[col].dtype != 'O']
@@ -131,7 +131,7 @@ def visulizationOfNumerical(df):
     
 visulizationOfNumerical(data)
 
-@st.cache_data(experimental_allow_widgets=True)
+#@st.cache_data(experimental_allow_widgets=True)
 def visl_categorical(df):
     st.title('Visualizing categorical Data')
 

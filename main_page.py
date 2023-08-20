@@ -4,6 +4,7 @@ import io
 import sqlalchemy
 from sqlalchemy import create_engine
 import plotly.express as px
+from sklearn.impute import SimpleImputer 
 
 st.title('Visualizing Data :sunglasses:')
 #@st.cache_data(experimental_allow_widgets=True)
